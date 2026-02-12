@@ -1,6 +1,7 @@
 ﻿using Dotnet_API_10_.Dtos;
 using Dotnet_API_10_.Entities;
 using Dotnet_API_10_.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,6 +31,12 @@ namespace Dotnet_API_10_.Controllers
             if (token is null)
                 return BadRequest("Invalid User");
             return Ok(token);
+        }
+        [Authorize]
+        [HttpGet]
+        public IActionResult Authenticated()
+        {
+            return Ok("You are Authenticated");
         }
     }
 }

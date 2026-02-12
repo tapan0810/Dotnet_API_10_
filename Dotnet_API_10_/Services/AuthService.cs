@@ -64,13 +64,13 @@ namespace Dotnet_API_10_.Services
             };
 
             var key = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(configuration.GetValue<string>("AppSettings:Token")));
+                Encoding.UTF8.GetBytes(configuration.GetValue<string>("AppSettings:Token")!));
 
             var creds = new SigningCredentials(key,SecurityAlgorithms.HmacSha256);
 
             var tokenDescriptor = new JwtSecurityToken(
                 issuer:configuration.GetValue<string>("AppSettings:Issuer"),
-                audience:configuration.GetValue<string>("AppSettings:audience"),
+                audience:configuration.GetValue<string>("AppSettings:Audience"),
                 claims: claims,
                 expires:DateTime.UtcNow.AddDays(1),
                 signingCredentials: creds
